@@ -1,0 +1,16 @@
+{eval /*=============侧边栏banner=============*/}
+{eval $sidebannerlist=array(
+    array(
+        "pic" => "http://bbs-static.smartisan.com/data/attachment/web/advertisement/images/1465355376576.png",
+        "url" => "https://addon.dismall.com/",
+    ),
+    array(
+        "pic" => "http://bbs-static.smartisan.com/data/attachment/web/advertisement/images/1562756246794.png",
+        "url" => "https://addon.dismall.com/?@51983.developer",
+    ),
+);}
+<!--{loop $sidebannerlist $item}-->
+<div class="mwt-panel">
+    <a href="{$item[url]}"  target="_blank"><img src="{$item[pic]}" style="width:250px;"></a>
+</div>
+<!--{/loop}-->

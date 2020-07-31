@@ -1,0 +1,75 @@
+/** forum::index **/
+
+.fl { border: none; background: #f2f2f2; }
+.fl .bmw { margin-bottom: 15px; }
+.fl .bm_h, #online .bm_h { height: 40px; line-height: 40px; border-top: none; border-bottom: 1px solid #eee; background: #fff; }
+.bmw .bm_h a { color: #000; font-weight: normal; font-size: 14px; }
+.bm_h .o img { margin-top: 13px; }
+.bm { border: 1px solid #eee !important; }
+#asl_top_bk { background: #fff; border-radius: 2px; margin-bottom: 15px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); }
+#asl_top_bk h3 { position: relative; font-weight: normal; height: 50px; line-height: 50px; padding: 0 15px; border-bottom: 1px dotted #e9e9e9; color: #333; border-radius: 2px 2px 0 0; font-size: 14px; }
+#asl_top_bk .row { padding: 15px 15px 14px; }
+#asl_top_bk .row a { display: block; float: left; width: 153px; height: 48px; line-height: 48px; padding: 0 10px; border: 1px solid #f2f2f2; border-left: none; border-top: none; text-align: center; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+#asl_top_bk .row a:hover { color: #5fb878; transition: all .3s; text-decoration: none; }
+/*diy*/
+#asl_top_ph { background: #fff; border-radius: 2px; margin-bottom: 15px; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); }
+#asl_top_ph h3 { position: relative; font-weight: normal; height: 50px; line-height: 50px; padding: 0 15px; border-bottom: 1px dotted #e9e9e9; color: #333; border-radius: 2px 2px 0 0; font-size: 14px; }
+#asl_top_ph dl { position: relative; overflow: hidden; margin-left: 20px; text-align: center; font-size: 0; }
+#asl_top_ph dl dd { position: relative; width: 65px; height: 85px; margin: 10px 25px 5px 0; display: inline-block; vertical-align: top; font-size: 12px; }
+#asl_top_ph dl dd a img { width: 65px; height: 65px; border-radius: 2px; }
+#asl_top_ph dl dd a cite { position: absolute; bottom: 20px; left: 0; width: 100%; height: 20px; line-height: 20px; text-align: center; background-color: rgba(0,0,0,.2); color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#asl_top_ph dl dd a i { position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: normal; }
+#asl_top_hzs { margin-bottom: 15px; border-radius: 2px; background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); }
+#asl_top_hzs h3 { position: relative; height: 50px; line-height: 50px; padding: 0 15px; border-bottom: 1px dotted #E9E9E9; color: #333; border-radius: 2px 2px 0 0; font-size: 14px; }
+#asl_top_hzs .aslmain { padding: 10px 15px; }
+#asl_top_hzs .aslmain a { display: block; position: relative; height: 60px; line-height: 60px; margin-top: 10px; padding: 0 20px; text-align: center; font-size: 16px; font-weight: 300; background: #5FB878; color: #fff; }
+#asl_top_hzs .aslmain a:hover { opacity: 0.9; color: #fff; text-decoration: none; }
+#asl_top_new { margin-bottom: 15px; border-radius: 2px; background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); }
+#asl_top_new .asl_top_new_title { position: relative; height: 50px; line-height: 50px; padding: 0 15px; border-bottom: 1px dotted #E9E9E9; color: #333; border-radius: 2px 2px 0 0; font-size: 14px; }
+#asl_top_new dd { margin: 0 15px; line-height: 36px; white-space: nowrap; overflow: hidden; list-style: decimal-leading-zero inside; color: #2f549f; border-bottom: 1px dotted #E9E9E9; }
+#asl_top_new dd a { max-width: 75%; margin-right: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; display: inline-block; vertical-align: top; font-style: normal; }
+#asl_top_new dd a:hover { color: #2f549f; transition: all .3s; text-decoration: none; }
+#asl_top_new dd span { font-size: 12px; color: #ccc; float: right; }
+/** end **/
+
+
+/** misc::ranklist **/
+
+.biduser { width: 990px; }
+.xl2 li { width: 483px; }
+
+/** end **/
+
+/** home::space **/
+
+#diy-tg { margin:0 !important;}
+#moodfm textarea { width:940px;}
+.sfm .pt { width: 885px;}
+.sfm .px { width: 885px;}
+.mi #moodfm textarea { width:554px;}
+
+/** end **/
+
+/** home::spacecp **/
+
+#asl_foot { margin-top:10px;}
+
+/** end **/
+
+/** home::follow **/
+
+#fastpostform { width: 100%;}
+
+/** end **/
+
+
+/** forum::forumdisplay **/
+
+.asl_bd { height:46px; line-height:40px; background:#fff !important;}
+
+.asl_bd tr,.asl_bd td,.asl_bd th { padding:0 !important; margin:0 !important;}
+
+.tl tr:hover th, .tl tr:hover td { background:#fff;}
+
+#atarget { margin-top:12px; margin-right:10px;}
+/** end **/

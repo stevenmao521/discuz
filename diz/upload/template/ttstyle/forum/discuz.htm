@@ -1,0 +1,221 @@
+<!--{template common/header}-->
+
+<div id="pt" class="bm cl">
+	<div class="z">
+		<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em><a href="forum.php">{$_G[setting][navs][2][navname]}</a>$navigation
+	</div>
+</div>
+<div><!--{hook/index_status_extra}--></div>
+
+<!--{if empty($gid)}-->
+	<!--{ad/text/wp a_t}-->
+<!--{/if}-->
+
+	<style id="diy_style" type="text/css"></style>
+
+<!--{if empty($gid)}-->
+	<div class="wp">
+		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
+	</div>
+<!--{/if}-->
+
+
+<div id="ct">
+	{eval /*=============首页四格=============*/}
+	<!--{template forum/components/index_four_grid}-->
+    <table class="mslay">
+		{eval /*=============左侧主栏=============*/}
+        <tr><td class="main">
+			<!--{hook/index_top}-->
+			<!--{if !empty($_G['cache']['heats']['message'])}-->
+			<div class="bm">
+				<div class="bm_h cl">
+					<h2>{lang hotthreads_forum}</h2>
+				</div>
+				<div class="bm_c cl">
+					<div class="heat z">
+						<!--{loop $_G['cache']['heats']['message'] $data}-->
+						<dl class="xld">
+							<dt><!--{if $_G['adminid'] == 1}--><a class="d" href="forum.php?mod=misc&action=removeindexheats&tid=$data[tid]" onclick="return removeindexheats()">delete</a><!--{/if}-->
+								<a href="forum.php?mod=viewthread&tid=$data[tid]" target="_blank" class="xi2">$data[subject]</a></dt>
+							<dd>$data[message]</dd>
+						</dl>
+						<!--{/loop}-->
+					</div>
+					<ul class="xl xl1 heatl">
+						<!--{loop $_G['cache']['heats']['subject'] $data}-->
+						<li><!--{if $_G['adminid'] == 1}--><a class="d" href="forum.php?mod=misc&action=removeindexheats&tid=$data[tid]" onclick="return removeindexheats()">delete</a><!--{/if}-->&middot; <a href="forum.php?mod=viewthread&tid=$data[tid]" target="_blank" class="xi2">$data[subject]</a></li>
+						<!--{/loop}-->
+					</ul>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{hook/index_catlist_top}-->
+			{eval /*=============我收藏的xxx=============*/}
+			<!--{if !empty($collectiondata['follows'])}-->
+			<div class="fl bm">
+				<!--{eval $forumscount = count($collectiondata['follows']);}-->
+				<!--{eval $forumcolumns = 4;}-->
+				<!--{eval $forumcolwidth = (floor(100 / $forumcolumns) - 0.1).'%';}-->
+				<div class="bm bmw {if $forumcolumns} flg{/if} cl">
+					<div class="bm_h cl">
+					<span class="o">
+						<img id="category_-1_img" src="{IMGDIR}/$collapse['collapseimg_-1']" title="{lang spread}" alt="{lang spread}" onclick="toggle_collapse('category_-1');" />
+					</span>
+						<h2><a href="forum.php?mod=collection&op=my">{lang my_order_collection}</a></h2>
+					</div>
+					<div id="category_-1" class="bm_c" style="{echo $collapse['category_-1']}">
+						<table cellspacing="0" cellpadding="0" class="fl_tb">
+							<tr>
+								<!--{eval $ctorderid = 0;}-->
+								<!--{loop $collectiondata['follows'] $key $colletion}-->
+								<!--{if $ctorderid && ($ctorderid % $forumcolumns == 0)}-->
+							</tr>
+							<!--{if $ctorderid < $forumscount}-->
+							<tr class="fl_row">
+								<!--{/if}-->
+								<!--{/if}-->
+								<td class="fl_g"{if $forumcolwidth} width="$forumcolwidth"{/if}>
+								<div class="fl_icn_g">
+									<a href="forum.php?mod=collection&action=view&ctid={$colletion[ctid]}" target="_blank"><img src="{IMGDIR}/forum{if $followcollections[$key]['lastvisit'] < $colletion['lastupdate']}_new{/if}.gif" alt="$colletion[name]" /></a>
+								</div>
+								<dl>
+									<dt><a href="forum.php?mod=collection&action=view&ctid={$colletion[ctid]}">$colletion[name]</a></dt>
+									<dd><em>{lang forum_threads}: <!--{echo dnumber($colletion[threadnum])}--></em>, <em>{lang collection_commentnum}: <!--{echo dnumber($colletion[commentnum])}--></em></dd>
+									<dd>
+										<!--{if $colletion['lastpost']}-->
+										<!--{if $forumcolumns < 3}-->
+										<a href="forum.php?mod=redirect&tid=$colletion[lastpost]&goto=lastpost#lastpost" class="xi2"><!--{echo cutstr($colletion[lastsubject], 30)}--></a> <cite><!--{date($colletion[lastposttime])}--> <!--{if $colletion['lastposter']}-->$colletion['lastposter']<!--{else}-->$_G[setting][anonymoustext]<!--{/if}--></cite>
+										<!--{else}-->
+										<a href="forum.php?mod=redirect&tid=$colletion[lastpost]&goto=lastpost#lastpost">{lang forum_lastpost}: <!--{date($colletion[lastposttime])}--></a>
+										<!--{/if}-->
+										<!--{else}-->
+										{lang never}
+										<!--{/if}-->
+									</dd>
+									<!--{hook/index_followcollection_extra $colletion[ctid]}-->
+								</dl>
+								</td>
+								<!--{eval $ctorderid++;}-->
+
+								<!--{/loop}-->
+								<!--{if ($columnspad = $ctorderid % $forumcolumns) > 0}--><!--{echo str_repeat('<td class="fl_g"'.($forumcolwidth ? " width=\"$forumcolwidth\"" : '').'></td>', $forumcolumns - $columnspad);}--><!--{/if}-->
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			<!--{template forum/components/index_catelist}-->
+        </td>
+		{eval /*=============侧边栏=============*/}
+		<td class="side">
+			{eval /*=============论坛公告=============*/}
+			<div id="announcement-div"></div>
+			{eval /*=============官方应用下载=============*/}
+			<!--{template common/side_download}-->
+			{eval /*=============论坛统计=============*/}
+			<!--{if empty($gid)}-->
+			<div class="bm micon">
+				<ul class="xm_index_info">
+					<li><span class="num">{$todayposts}</span><span class="txt">今日发帖数</span></li>
+					<li><span class="num">{$postdata[0]}</span><span class="txt">昨日发帖数</span></li>
+					<li><span class="num">{$posts}</span><span class="txt">论坛总帖数</span></li>
+					<li><span class="num">{$_G['cache']['userstats']['totalmembers']}</span><span class="txt">论坛会员数
+</span></li>
+				</ul>
+				<!--{hook/index_nav_extra}-->
+			</div>
+			<!--{/if}-->
+			{eval /*=============在线会员=============*/}
+			<!--{if empty($gid) && $_G['setting']['whosonlinestatus'] && $detailstatus}-->
+			<div class="mwt-panel">
+				<div class="head">{lang onlinemember}</div>
+				<div class="body">
+					<div class="onnum">
+						<ol class="clearfix" style="margin:0;">
+							<li>
+								<span class="num">{$onlinenum}</span>
+								<span class="txt">{lang onlines}</span>
+							</li>
+							<li>
+								<span class="num">{$membercount}</span>
+								<span class="txt">{lang index_members}</span>
+							</li>
+							<li>
+								<span class="num">{$invisiblecount}</span>
+								<span class="txt">{lang index_invisibles}</span>
+							</li>
+							<li>
+								<span class="num">{$guestcount}</span>
+								<span class="txt">{lang index_guests}</span>
+							</li>
+						</ol>
+						<!--{if $whosonline}-->
+						<ul class="cl" style="margin-top:20px;">
+							<!--{loop $whosonline $key $online}-->
+							<li class="onli" title="{lang time}: $online[lastactivity]">
+								<img src="{STATICURL}image/common/$online[icon]" alt="icon" />
+								<!--{if $online['uid']}-->
+								<a href="home.php?mod=space&uid=$online[uid]">$online[username]</a>
+								<!--{else}-->
+								$online[username]
+								<!--{/if}-->
+							</li>
+							<!--{/loop}-->
+						</ul>
+						<!--{/if}-->
+					</div>
+				</div>
+			</div>
+			<!--{/if}-->
+			{eval /*=============保留hook=============*/}
+			<div>
+				<!--{loop $collectiondata['follows'] $key $colletion}-->
+				<!--{if $forumcolumns>1}-->
+				<!--{hook/index_favforum_extra $forum[fid]}-->
+				<!--{else}-->
+				<!--{hook/index_favforum_extra $forum[fid]}-->
+				<!--{/if}-->
+				<!--{hook/index_followcollection_extra $colletion[ctid]}-->
+				<!--{/loop}-->
+				<!--{loop $collectiondata['data'] $key $colletion}-->
+				<!--{hook/index_datacollection_extra $colletion[ctid]}-->
+				<!--{/loop}-->
+			</div>
+			{eval /*=============友情链接=============*/}
+			<!--{if empty($gid) && ($_G['cache']['forumlinks'][0] || $_G['cache']['forumlinks'][1] || $_G['cache']['forumlinks'][2])}-->
+			<div class="mwt-panel">
+				<div class="head">友情链接</div>
+				<div class="body lk">
+					<!--{if $_G['cache']['forumlinks'][0]}-->
+					<ul class="m mbn cl">$_G['cache']['forumlinks'][0]</ul>
+					<!--{/if}-->
+					<!--{if $_G['cache']['forumlinks'][1]}-->
+					<div class="mbn cl">
+						$_G['cache']['forumlinks'][1]
+					</div>
+					<!--{/if}-->
+					<!--{if $_G['cache']['forumlinks'][2]}-->
+					<ul class="x mbm cl" style="margin-bottom:0px !important;">
+						$_G['cache']['forumlinks'][2]
+					</ul>
+					<!--{/if}-->
+				</div>
+			</div>
+			<!--{hook/index_side_bottom}-->
+			<!--{/if}-->
+        </td></tr>
+    </table>
+</div>
+
+
+<script>
+	jQuery(document).ready(function() {
+		require(["japp"],function(japp){
+			japp.run('forum/discuz');
+		});
+	});
+</script>
+<!--{if empty($_G['setting']['disfixednv_forumindex']) }--><script>fixed_top_nv();</script><!--{/if}-->
+<!--{template common/footer}-->

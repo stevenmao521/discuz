@@ -1,0 +1,88 @@
+{eval /*=============版块信息=============*/}
+<div class="mwt-panel">
+    <div class="body" style="text-align: left;">
+        <!--{if $_G['page'] == 1 && $_G['forum']['rules']}--><span class="o"><img id="forum_rules_{$_G[fid]}_img" src="{IMGDIR}/collapsed_{$collapse[forum_rulesimg]}.gif" title="{lang spread}" alt="{lang spread}" onclick="toggle_collapse('forum_rules_{$_G[fid]}')" /></span><!--{/if}-->
+        {eval /*=============版块管理按钮=============*/}
+        <ul class="toolul">
+            <li pop-title="{lang forum_favorite}" pop-cls="mwt-popover-danger">
+                <a href="home.php?mod=spacecp&ac=favorite&type=forum&id=$_G[fid]&handlekey=favoriteforum&formhash={FORMHASH}" id="a_favorite" onclick="showWindow(this.id, this.href, 'get', 0);">
+                    <i class="sicon-star"></i></a>
+            </li>
+            <!--{if rssforumperm($_G['forum']) && $_G[setting][rssstatus] && !$_GET['archiveid'] && !$subforumonly}-->
+            <li pop-title="{lang rss_subscribe_this}" pop-cls="mwt-popover-danger">
+                <a href="forum.php?mod=rss&fid=$_G[fid]&auth=$rssauth" target="_blank" title="RSS">
+                    <i class="sicon-feed"></i></a>
+            </li>
+            <!--{/if}-->
+            <!--{if !empty($forumarchive)}-->
+            <li>
+                <a id="forumarchive" href="javascript:;" class="fa_achv" onmouseover="showMenu(this.id)"><!--{if $_GET['archiveid']}-->$forumarchive[$_GET['archiveid']]['displayname']<!--{else}-->{lang forum_archive}<!--{/if}--></a>
+            </li>
+            <!--{/if}-->
+            <!--{hook/forumdisplay_forumaction}-->
+            {eval /*=============管理员按钮=============*/}
+            <!--{if $_G['forum']['ismoderator']}-->
+            <!--{if $_G['forum']['recyclebin']}-->
+            <li pop-title="{lang forum_recyclebin}" pop-cls="mwt-popover-danger">
+                <a href="{if $_G['adminid'] == 1}admin.php?mod=forum&action=recyclebin&frames=yes{elseif $_G['forum']['ismoderator']}forum.php?mod=modcp&action=recyclebin&fid=$_G[fid]{/if}" target="_blank">
+                    <i class="icon icon-trash" style="font-size: 15px;"></i></a>
+            </li>
+            <!--{/if}-->
+            <!--{if $_G['forum']['ismoderator'] && !$_GET['archiveid']}-->
+            <li pop-title="{lang modcp}" pop-cls="mwt-popover-danger">
+                <!--{if $_G['forum']['status'] != 3}-->
+                <a href="forum.php?mod=modcp&fid=$_G[fid]"><i class="sicon-settings"></i></a>
+                <!--{else}-->
+                <a href="forum.php?mod=group&action=manage&fid=$_G[fid]"><i class="sicon-settings"></i></a>
+                <!--{/if}-->
+            </li>
+            <!--{/if}-->
+            <!--{hook/forumdisplay_modlink}-->
+            <!--{/if}-->
+            <!--{if $moderatedby}-->
+            <li class="forum_modedby rt" style="padding-top: 5px;color:#aaa;">{lang forum_modedby}: $moderatedby</li>
+            <!--{/if}-->
+            <!--{if $_G['page'] == 1 && $_G['forum']['rules']}-->
+            <li style="display: none;">
+                <div id="forum_rules_{$_G[fid]}" style="$collapse['forum_rules'];">
+                    <div class="ptn xg2">$_G['forum'][rules]</div>
+                </div>
+            </li>
+            <!--{/if}-->
+        </ul>
+        {eval $forumicon="$staticdir/imgs/default_forum_banner.png\" style='border-radius:100px;'";}
+        {eval if($_G[forum][banner]!="")$forumicon=$_G[forum][banner];}
+        <a class="forum-card" href="forum.php?mod=forumdisplay&fid=$_G[fid]">
+            <img src="{$forumicon}"/>
+            <span>$_G['forum'][name]</span>
+        </a>
+    </div>
+
+    <div class="body" style="display: none;">
+        <!--{if !empty($forumarchive)}-->
+        <div id="forumarchive_menu" class="p_pop" style="display:none">
+            <ul>
+                <li><a href="forum.php?mod=forumdisplay&fid=$_G[fid]">{lang threads_all}</a></li>
+                <!--{loop $forumarchive $id $info}-->
+                <li><a href="forum.php?mod=forumdisplay&fid=$_G[fid]&archiveid=$id">{$info['displayname']} ({$info['threads']})</a></li>
+                <!--{/loop}-->
+            </ul>
+        </div>
+        <!--{/if}-->
+    </div>
+    {eval /*=============版块统计信息=============*/}
+    <div class="foot mwt-row">
+        <div class="mwt-col-4 stat">
+            <span>{lang index_today}</span>
+            <strong>$_G[forum][todayposts]</strong>
+        </div>
+        <div class="mwt-col-4 stat">
+            <span>{lang index_threads}</span>
+            <strong>$_G[forum][threads]</strong>
+        </div>
+        <div class="mwt-col-4 stat" style="border-right: none;">
+            <span>{lang rank}</span>
+            <strong>$_G[forum][rank]</strong>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<link rel="stylesheet" type="text/css" href="{$_G['style']['staticdir']}/libs/mwt/4.0/mwt.min.css"/>
+<link rel="stylesheet" type="text/css" href="{$_G['style']['staticdir']}/ttstyle.min.css"/>
+<script type="text/javascript" src="{$_G['style']['staticdir']}/libs/jquery.min.js"></script>
+<!--{if $_G[basescript]!="forum" || $_G[gp_mod]!="post" || $_G[gp_action]!="newthread"}-->
+    <script type="text/javascript" src="{$_G['style']['staticdir']}/libs/mwt/4.0/mwt.min.js"></script>
+<!--{/if}-->
+<script type="text/javascript" src="{$_G['style']['staticdir']}/libs/require.min.js"></script>
+<script type="text/javascript">
+var dz = {
+    uid:'$_G[uid]',
+    groupid:'$_G[groupid]',
+	username:'$_G[username]',
+	charset:'{CHARSET}',
+	version:'$_G[setting][version]',
+	bbname: '$_G[setting][bbname]',
+	sitename: '$_G[setting][sitename]',
+	sitelogo: '$_G[siteurl]static/image/mobile/images/logo.png',
+	siteurl: '$_G[siteurl]'
+};
+require.config({
+    baseUrl: "{$_G['style']['staticdir']}/dist-20191011215134/"
+});
+var japp;
+require(["japp"],function(_japp){
+    japp = _japp;
+    japp.init();
+});
+</script>
+<!--{eval $staticdir=$_G['style']['staticdir']}-->

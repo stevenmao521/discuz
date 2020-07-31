@@ -1,0 +1,21 @@
+{eval /*=============子版块=============*/}
+<!--{if $subexists && $_G['page'] == 1}-->
+<div class="mwt-panel">
+    <div class="head">{lang forum_subforums}</div>
+    <div class="body" style="padding:15px 20px">
+        <ul id="subforum_{$_G[forum][fid]}" class="subforum">
+            <!--{loop $sublist $sub}-->
+            <li>
+                <a href="forum.php?mod=forumdisplay&fid={$sub[fid]}" {if !empty($sub[redirect])}target="_blank" {/if}
+            style="{if !empty($sub[extra][namecolor])}color: {$sub[extra][namecolor]};{/if}">$sub[name]</a>
+            </li>
+            <!--{if $sub}-->
+            <!--{hook/forumdisplay_subforum_extra $sub[fid]}-->
+            <!--{else}-->
+            <!--{hook/forumdisplay_subforum_extra $sub[fid]}-->
+            <!--{/if}-->
+            <!--{/loop}-->
+        </ul>
+    </div>
+</div>
+<!--{/if}-->

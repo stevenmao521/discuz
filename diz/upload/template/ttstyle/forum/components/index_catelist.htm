@@ -1,0 +1,103 @@
+{eval /*=============我收藏的版块=============*/}
+<!--{if empty($gid) && !empty($forum_favlist)}-->
+<div class="mwt-panel">
+	<div class="head mwt-row">
+		<div class="mwt-col-10">
+			<a class="mwt-panel-title" href="home.php?mod=space&do=favorite&type=forum">{lang forum_myfav}</a>
+		</div>
+		<div class="mwt-col-2 rt">
+			<img id="category_0_img" class="toggle-btn" src="{$staticdir}/imgs/$collapse[collapseimg_0]"
+				 title="{lang spread}" alt="{lang spread}" onclick="toggle_collapse('category_0');" />
+		</div>
+	</div>
+	<div class="body" id="category_0" style="{echo $collapse['category_0']};padding:0;">
+		<ul class="cate-forum-list">
+		<!--{eval $favorderid = 0;}-->
+		<!--{loop $forum_favlist $key $favorite}-->
+			<!--{if $favforumlist[$favorite[id]]}-->
+			<!--{eval $forum=$favforumlist[$favorite[id]];}-->
+			<!--{eval $forumurl = !empty($forum['domain']) && !empty($_G['setting']['domain']['root']['forum']) ? $_G['scheme'].'://'.$forum['domain'].'.'.$_G['setting']['domain']['root']['forum'] : 'forum.php?mod=forumdisplay&fid='.$forum['fid'];}-->
+			<li>
+				<div class="forum-icon">
+					<!--{if $forum[icon]}-->
+					$forum[icon]
+					<!--{else}-->
+					<a href="$forumurl"{if $forum[redirect]} target="_blank"{/if}><img src="{IMGDIR}/forum{if $forum[folder]}_new{/if}.gif" alt="$forum[name]" /></a>
+					<!--{/if}-->
+				</div>
+				<div class="forum-info">
+					<a class="forum-name"  href="$forumurl"{if $forum[redirect]} target="_blank"{/if}
+					{if $forum[extra][namecolor]} style="color: {$forum[extra][namecolor]};"{/if}>$forum[name]</a>
+					<p class="forum-summary">
+						{lang forum_todayposts}: <em style="color:#cd3c39"><!--{echo dnumber($forum[todayposts])}--></em>
+						{lang forum_threads}: <em><!--{echo dnumber($forum[threads])}--></em>
+						{lang forum_posts}: <em><!--{echo dnumber($forum[posts])}--></em>
+						<!--{if $forum['permission'] == 1}-->
+						{lang private_forum}
+						<!--{/if}-->
+					</p>
+					<!--{hook/index_favforum_extra $forum[fid]}-->
+				</div>
+			</li>
+			<!--{/if}-->
+		<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+<!--{ad/intercat/bm a_c/-1}-->
+<!--{/if}-->
+
+
+{eval /*=============版块区域列表=============*/}
+<!--{loop $catlist $key $cat}-->
+<!--{hook/index_catlist $cat[fid]}-->
+<div class="mwt-panel" id="index-category-{$fid}">
+	{eval /*=============版块区域头部=============*/}
+	<div class="head mwt-row">
+		<div class="mwt-col-10">
+			<!--{if $cat['moderators']}--><span class="y">{lang forum_category_modedby}: $cat[moderators]</span><!--{/if}-->
+			<!--{eval $caturl = !empty($cat['domain']) && !empty($_G['setting']['domain']['root']['forum']) ? $_G['scheme'].'://'.$cat['domain'].'.'.$_G['setting']['domain']['root']['forum'] : '';}-->
+			<a class="mwt-panel-title" href="{if !empty($caturl)}$caturl{else}forum.php?gid=$cat[fid]{/if}"
+			   style="{if $cat[extra][namecolor]}color: {$cat[extra][namecolor]};{/if}">$cat[name]</a>
+		</div>
+
+		<div class="mwt-col-2 rt">
+			<img id="category_$cat[fid]_img" class="toggle-btn"
+				 src="{$staticdir}/imgs/$cat[collapseimg]"
+				 title="{lang spread}" alt="{lang spread}" onclick="toggle_collapse('category_$cat[fid]');" />
+		</div>
+	</div>
+	{eval /*=============版块区域内容（版块列表）=============*/}
+	<div class="body" id="category_$cat[fid]" style="{echo $collapse['category_'.$cat[fid]]};padding:0;">
+		<ul class="cate-forum-list">
+			<!--{loop $cat[forums] $idx $forumid}-->
+			<!--{eval $forum=$forumlist[$forumid];}-->
+			<!--{eval $forumurl = !empty($forum['domain']) && !empty($_G['setting']['domain']['root']['forum']) ? $_G['scheme'].'://'.$forum['domain'].'.'.$_G['setting']['domain']['root']['forum'] : 'forum.php?mod=forumdisplay&fid='.$forum['fid'];}-->
+			<li>
+				<div class="forum-icon">
+				<!--{if $forum[icon]}-->
+					$forum[icon]
+				<!--{else}-->
+					<a href="$forumurl"{if $forum[redirect]} target="_blank"{/if}><img src="{IMGDIR}/forum{if $forum[folder]}_new{/if}.gif" alt="$forum[name]" /></a>
+				<!--{/if}-->
+				</div>
+				<div class="forum-info">
+					<a class="forum-name"  href="$forumurl"{if $forum[redirect]} target="_blank"{/if}
+						{if $forum[extra][namecolor]} style="color: {$forum[extra][namecolor]};"{/if}>$forum[name]</a>
+					<p class="forum-summary">
+						{lang forum_todayposts}: <em style="color:#cd3c39"><!--{echo dnumber($forum[todayposts])}--></em>
+						{lang forum_threads}: <em><!--{echo dnumber($forum[threads])}--></em>
+						{lang forum_posts}: <em><!--{echo dnumber($forum[posts])}--></em>
+						<!--{if $forum['permission'] == 1}-->
+						{lang private_forum}
+						<!--{/if}-->
+					</p>
+					<!--{hook/index_forum_extra $forum[fid]}-->
+				</div>
+			</li>
+			<!--{/loop}-->
+		</ul>
+	</div>
+</div>
+<!--{ad/intercat/bm a_c/$cat[fid]}-->
+<!--{/loop}-->

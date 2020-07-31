@@ -1,0 +1,90 @@
+{eval /*=============首页四格=============*/}
+<!--{if !empty($_G['setting']['grid']['showgrid'])}-->
+<div id="category_grid" class="mwt-panel" >
+	<table cellspacing="0" cellpadding="0"><tr>
+	<!--{if !$_G['setting']['grid']['gridtype']}-->
+		<td valign="top" class="category_l1">
+			<div class="newimgbox">
+				<h4><span class="tit_newimg"></span>{lang latest_images}</h4>
+				<div class="module cl slidebox_grid" style="width:218px">
+					<script type="text/javascript">
+					var slideSpeed = 5000;
+					var slideImgsize = [218,200];
+					var slideBorderColor = '{$_G['style']['specialborder']}';
+					var slideBgColor = '{$_G['style']['commonbg']}';
+					var slideImgs = new Array();
+					var slideImgLinks = new Array();
+					var slideImgTexts = new Array();
+					var slideSwitchColor = '{$_G['style']['tabletext']}';
+					var slideSwitchbgColor = '{$_G['style']['commonbg']}';
+					var slideSwitchHiColor = '{$_G['style']['specialborder']}';
+					{eval $k = 1;}
+					<!--{loop $grids['slide'] $stid $svalue}-->
+						slideImgs[<!--{echo $k}-->] = '$svalue[image]';
+						slideImgLinks[<!--{echo $k}-->] = '{$svalue[url]}';
+						slideImgTexts[<!--{echo $k}-->] = '$svalue[subject]';
+						{eval $k++;}
+					<!--{/loop}-->
+					</script>
+					<script language="javascript" type="text/javascript" src="{$_G[setting][jspath]}forum_slide.js?{VERHASH}"></script>
+				</div>
+			</div>
+		</td>
+	<!--{/if}-->
+	<td valign="top" class="category_l2">
+		<div class="subjectbox">
+			<h4><span class="tit_subject"></span>{lang collection_lastthread}</h4>
+			<ul class="category_newlist">
+				<!--{loop $grids['newthread'] $thread}-->
+				<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+					<!--{eval $thread[tid]=$thread[closed];}-->
+				<!--{/if}-->
+				<li><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
+				<!--{/loop}-->
+			 </ul>
+		 </div>
+	</td>
+	<td valign="top" class="category_l3">
+		<div class="replaybox">
+			<h4><span class="tit_replay"></span>{lang show_newthreads}</h4>
+			<ul class="category_newlist">
+				<!--{loop $grids['newreply'] $thread}-->
+				<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+					<!--{eval $thread[tid]=$thread[closed];}-->
+				<!--{/if}-->
+				<li><a href="forum.php?mod=redirect&tid=$thread[tid]&goto=lastpost#lastpost"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']}tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
+				<!--{/loop}-->
+			 </ul>
+		 </div>
+	</td>
+	<td valign="top" class="category_l3">
+		<div class="hottiebox">
+			<h4><span class="tit_hottie"></span>{lang hot_thread}</h4>
+			<ul class="category_newlist">
+				<!--{loop $grids['hot'] $thread}-->
+				<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+					<!--{eval $thread[tid]=$thread[closed];}-->
+				<!--{/if}-->
+				<li><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
+				<!--{/loop}-->
+			 </ul>
+		 </div>
+	</td>
+	<!--{if $_G['setting']['grid']['gridtype']}-->
+		<td valign="top" class="category_l4">
+			<div class="goodtiebox">
+				<h4><span class="tit_goodtie"></span>{lang post_digest_thread}</h4>
+				<ul class="category_newlist">
+					<!--{loop $grids['digest'] $thread}-->
+						<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
+							<!--{eval $thread[tid]=$thread[closed];}-->
+						<!--{/if}-->
+						<li><a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra"{if $thread['highlight']} $thread['highlight']{/if}{if $_G['setting']['grid']['showtips']} tip="{lang title}: <strong>$thread[oldsubject]</strong><br/>{lang author}: $thread[author] ($thread[dateline])<br/>{lang show}/{lang reply}: $thread[views]/$thread[replies]" onmouseover="showTip(this)"{else} title="$thread[oldsubject]"{/if}{if $_G['setting']['grid']['targetblank']} target="_blank"{/if}>$thread[subject]</a></li>
+					<!--{/loop}-->
+				 </ul>
+			</div>
+		</td>
+	<!--{/if}-->
+	</table>
+</div>
+<!--{/if}-->
