@@ -39,11 +39,11 @@ class helper_mobile {
 			ob_start();
 			$_G['forcemobilemessage'] = true;
 			parse_str($_SERVER['QUERY_STRING'], $query);
-			$query['forcemobile'] = '1';
+			$query['forcemobile'] = 'no';
 			$query_sting_tmp = http_build_query($query);
 			$_G['setting']['mobile']['pageurl'] = $_G['siteurl'].basename($_G['PHP_SELF']).'?'.$query_sting_tmp;
 			unset($query_sting_tmp);
-			showmessage('not_in_mobile');
+			dheader('location:'.$_G['setting']['mobile']['pageurl']);
 			exit;
 		}
 	}
